@@ -180,32 +180,6 @@
 </head>
 <body>
 
-    <div class="main-container">
-        <h1>Ted's games/proxy's ig</h1>
-            // Apply immediately if the user is currently looking at the tab
-            if (!document.hidden) {
-                document.title = activeTitle;
-            }
-        }
-
-        // Detects when the user leaves or returns to the tab
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                // User clicked away to another tab
-                document.title = "NOT sneaky✌🥹";
-            } else {
-                // User clicked back onto your site
-                document.title = activeTitle;
-            }
-        });
-
-        // Panic Button Key Listener
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'x' || event.key === 'X') {
-                window.location.href = "https://schoology.com";
-            }
-        });
-    </script>
 
 </body>
 </html>
