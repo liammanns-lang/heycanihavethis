@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <!-- Default Favicon Placeholder -->
+    <link id="favicon" rel="icon" type="image/x-icon" href="https://google.com">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .settings-card {
+            background-color: #2d2d2d;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            width: 350px;
+        }
+        h2 {
+            margin-top: 0;
+            color: #4da6ff;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+        .setting-group {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #ccc;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #555;
+            background-color: #3d3d3d;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            outline: none;
+        }
+        select:focus {
+            border-color: #4da6ff;
+        }
+        .status-msg {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #2ecc71;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="settings-card">
+    <h2>Tab Settings</h2>
+    
+    <div class="setting-group">
+        <label for="cloak-selector">Tab Cloak Preset:</label>
+        <select id="cloak-selector" onchange="applyCloak()">
+            <option value="default">Default (Settings)</option>
+            <option value="schoology">Schoology</option>
+            <option value="clever">Clever</option>
+            <option value="ixl">IXL Learning</option>
+            <option value="drive">Google Drive</option>
+            <option value="blank">About Blank (Invisible)</option>
+        </select>
+    </div>
+    
+    <div id="status" class="status-msg">Tab cloaked successfully!</div>
+</div>
+
+<script>
+    // Configuration object holding the titles and favicon URLs for each preset
+    const cloakPresets = {
+        default: {
+            title: "Settings",
+            favicon: "https://google.com"
+        },
+        schoology: {
+            title: "Home | Schoology",
+            favicon: "https://schoology.com"
+        },
+        clever: {
+            title: "Clever | Portal",
+            favicon: "https://clever.com"
+        },
+        ixl: {
+            title: "IXL | Math and English Language Arts Practice",
+            favicon: "https://ixl.com"
+        },
+        drive: {
+            title: "My Drive - Google Drive",
+            favicon: "https://gstatic.com"
+        },
+        blank: {
+            title: "about:blank",
+            favicon: "data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMglEwCkbBSAcACBAAAegesVsAAAAASUVORK5CYII=" // Transparent icon
+        }
+    };
+
+    function applyCloak() {
+        const selector = document.getElementById('cloak-selector');
+        const selectedValue = selector.value;
+        const preset = cloakPresets[selectedValue];
+
+        if (preset) {
+            // Update the document title
+            document.title = preset.title;
+
+            // Find or create the favicon link element
+            let faviconLink = document.getElementById('favicon');
+            if (!faviconLink) {
+                faviconLink = document.createElement('link');
+                faviconLink.id = 'favicon';
+                faviconLink.rel = 'icon';
+                faviconLink.type = 'image/x-icon';
+                document.head.appendChild(faviconLink);
+            }
+            
+            // Update the favicon href attribute
+            faviconLink.href = preset.favicon;
+
+            // Show confirmation status message
+            const status = document.getElementById('status');
+            status.style.display = 'block';
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 2000);
+        }
+    }
+</script>
+
+</body>
+</html>
