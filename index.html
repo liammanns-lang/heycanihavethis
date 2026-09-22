@@ -69,3 +69,117 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- This links the pixel font from Google Fonts -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-image: url('ted-bouncer.jpeg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        /* Container Box */
+        .main-container {
+            background-color: rgba(0, 0, 0, 0.8); /* Slightly darker for better link readability */
+            padding: 40px 60px;
+            border-radius: 15px;
+            border: 6px solid #ffffff; 
+            text-align: center;
+            width: 85%;
+            max-width: 1000px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.7); 
+        }
+
+        /* Header Style */
+        h1 {
+            color: #ffffff;
+            font-size: 32px; 
+            line-height: 1.6;
+            margin: 0 0 40px 0;
+            text-shadow: 4px 4px 0px #000000;
+            border-bottom: 4px dashed #ffffff; /* Classic arcade separator line */
+            padding-bottom: 20px;
+        }
+
+        /* Section Headings (Proxies / Games) */
+        h2 {
+            color: #ff0055; /* Hot retro pink for categories */
+            font-size: 18px;
+            margin: 30px 0 20px 0;
+            text-shadow: 2px 2px 0px #000000;
+            text-transform: uppercase;
+        }
+
+        /* Button Grid System */
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Retro Arcade Style Buttons */
+        .arcade-btn {
+            display: block;
+            background-color: #111111;
+            color: #00ff66; /* Retro terminal green text */
+            text-decoration: none;
+            padding: 15px 10px;
+            font-size: 12px;
+            border: 3px solid #00ff66;
+            border-radius: 5px;
+            text-shadow: 1px 1px 0px #000000;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        /* Interactive Hover Effect */
+        .arcade-btn:hover {
+            background-color: #00ff66;
+            color: #111111; /* Inverts text color on hover */
+            box-shadow: 0px 0px 15px #00ff66; /* Glow effect */
+            transform: scale(1.03); /* Tiny pop-out animation */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <!-- Main Title -->
+        <h1>Ted's games/proxy's ig</h1>
+
+        <!-- Section 1: Proxies & Utilities -->
+        <h2>⚡ Main Proxies / Tools ⚡</h2>
+        <div class="link-grid">
+            <a href="https://example.com" target="_blank" class="arcade-btn">Proxy Link 1</a>
+            <a href="https://example.com" target="_blank" class="arcade-btn">Proxy Link 2</a>
+        </div>
+
+        <!-- Section 2: Games List -->
+        <h2>🎮 Games List 🎮</h2>
+        <div class="link-grid">
+            <a href="https://example.com" target="_blank" class="arcade-btn">Basket Random</a>
+            <a href="https://example.com" target="_blank" class="arcade-btn">Awesome Tanks 2</a>
+            <a href="https://example.com" target="_blank" class="arcade-btn">1v1.LOL</a>
+            <a href="https://example.com" target="_blank" class="arcade-btn">Slope</a>
+        </div>
+    </div>
+
+</body>
+</html>
