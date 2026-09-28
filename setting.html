@@ -4,144 +4,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settings</title>
-    <!-- Default Favicon Placeholder -->
-    <link id="favicon" rel="icon" type="image/x-icon" href="https://google.com">
+    <!-- Link to Font Awesome for the gear icon -->
+    <link rel="stylesheet" href="https://cloudflare.com">
     
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a1a1a;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
             color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
+            padding: 20px;
         }
-        .settings-card {
-            background-color: #2d2d2d;
+
+        /* Gear Button Styling */
+        .gear-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #ffffff;
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .gear-button:hover {
+            transform: rotate(90deg);
+            color: #00adb5;
+        }
+
+        /* Settings Container */
+        .settings-container {
+            max-width: 500px;
+            margin: 60px auto 0 auto;
+            background-color: #1e1e1e;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-            width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
+
         h2 {
             margin-top: 0;
-            color: #4da6ff;
-            border-bottom: 1px solid #444;
-            padding-bottom: 10px;
+            color: #00adb5;
         }
+
         .setting-group {
-            margin-top: 20px;
+            margin-bottom: 25px;
         }
+
         label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #ccc;
+            margin-bottom: 10px;
+            font-size: 16px;
         }
+
         select {
             width: 100%;
             padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #555;
-            background-color: #3d3d3d;
+            background-color: #2d2d2d;
             color: white;
+            border: 1px solid #444;
+            border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
-            outline: none;
         }
+
         select:focus {
-            border-color: #4da6ff;
-        }
-        .status-msg {
-            margin-top: 15px;
-            font-size: 14px;
-            color: #2ecc71;
-            display: none;
+            outline: none;
+            border-color: #00adb5;
         }
     </style>
 </head>
 <body>
 
-<div class="settings-card">
-    <h2>Tab Settings</h2>
-    
-    <div class="setting-group">
-        <label for="cloak-selector">Tab Cloak Preset:</label>
-        <select id="cloak-selector" onchange="applyCloak()">
-            <option value="default">Default (Settings)</option>
-            <option value="schoology">Schoology</option>
-            <option value="clever">Clever</option>
-            <option value="ixl">IXL Learning</option>
-            <option value="drive">Google Drive</option>
-            <option value="blank">About Blank (Invisible)</option>
-        </select>
+    <!-- Separate Gear Button at the Top Right -->
+    <div class="gear-button" onclick="scrollToSettings()" title="Go to Settings">
+        <i class="fas fa-cog"></i>
     </div>
-    
-    <div id="status" class="status-msg">Tab cloaked successfully!</div>
-</div>
 
-<script>
-    // Configuration object holding the titles and favicon URLs for each preset
-    const cloakPresets = {
-        default: {
-            title: "Settings",
-            favicon: "https://google.com"
-        },
-        schoology: {
-            title: "Home | Schoology",
-            favicon: "https://schoology.com"
-        },
-        clever: {
-            title: "Clever | Portal",
-            favicon: "https://clever.com"
-        },
-        ixl: {
-            title: "IXL | Math and English Language Arts Practice",
-            favicon: "https://ixl.com"
-        },
-        drive: {
-            title: "My Drive - Google Drive",
-            favicon: "https://gstatic.com"
-        },
-        blank: {
-            title: "about:blank",
-            favicon: "data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMglEwCkbBSAcACBAAAegesVsAAAAASUVORK5CYII=" // Transparent icon
+    <!-- Settings Menu Options -->
+    <div class="settings-container" id="settingsMenu">
+        <h2><i class="fas fa-sliders-h"></i> Website Settings</h2>
+        
+        <div class="setting-group">
+            <label for="cloakSelect">Select Tab Cloak:</label>
+            <select id="cloakSelect" onchange="changeTabCloak()">
+                <option value="default">Default (Game Site)</option>
+                <option value="schoology">Schoology</option>
+                <option value="ixl">IXL Learning</option>
+                <option value="clever">Clever</option>
+                <option value="google">New Tab</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll function for the gear button
+        function scrollToSettings() {
+            document.getElementById('settingsMenu').scrollIntoView({ behavior: 'smooth' });
         }
-    };
 
-    function applyCloak() {
-        const selector = document.getElementById('cloak-selector');
-        const selectedValue = selector.value;
-        const preset = cloakPresets[selectedValue];
-
-        if (preset) {
-            // Update the document title
-            document.title = preset.title;
-
-            // Find or create the favicon link element
-            let faviconLink = document.getElementById('favicon');
-            if (!faviconLink) {
-                faviconLink = document.createElement('link');
-                faviconLink.id = 'favicon';
-                faviconLink.rel = 'icon';
-                faviconLink.type = 'image/x-icon';
-                document.head.appendChild(faviconLink);
+        // Configuration mapping for preset sites
+        const cloakPresets = {
+            default: {
+                title: "My Game Website",
+                favicon: "ted-bouncer.jpeg" // Keeps your repo's bouncer image
+            },
+            schoology: {
+                title: "Home | Schoology",
+                favicon: "https://schoology.com"
+            },
+            ixl: {
+                title: "IXL | Dashboard",
+                favicon: "https://ixl.com"
+            },
+            clever: {
+                title: "Clever | Portal",
+                favicon: "https://clever.com"
+            },
+            google: {
+                title: "New Tab",
+                favicon: "https://google.com"
             }
-            
-            // Update the favicon href attribute
-            faviconLink.href = preset.favicon;
+        };
 
-            // Show confirmation status message
-            const status = document.getElementById('status');
-            status.style.display = 'block';
-            setTimeout(() => {
-                status.style.display = 'none';
-            }, 2000);
+        // Function to change title and icon dynamically
+        function changeTabCloak() {
+            const selectValue = document.getElementById('cloakSelect').value;
+            const selectedPreset = cloakPresets[selectValue];
+
+            if (selectedPreset) {
+                // Update the document title
+                document.title = selectedPreset.title;
+
+                // Find or create the favicon element
+                let link = document.querySelector("link[rel~='icon']");
+                if (!link) {
+                    link = document.createElement('link');
+                    link.rel = 'icon';
+                    document.getElementsByTagName('head')[0].appendChild(link);
+                }
+                
+                // Update the favicon link URL
+                link.href = selectedPreset.favicon;
+
+                // Save selection to LocalStorage so it persists across page reloads
+                localStorage.setItem('savedCloak', selectValue);
+            }
         }
-    }
-</script>
+
+        // Automatically load saved cloak preference when the window finishes loading
+        window.onload = function() {
+            const savedCloak = localStorage.getItem('savedCloak');
+            if (savedCloak) {
+                document.getElementById('cloakSelect').value = savedCloak;
+                changeTabCloak();
+            }
+        };
+    </script>
 
 </body>
 </html>
