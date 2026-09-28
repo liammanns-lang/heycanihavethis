@@ -187,3 +187,58 @@
 html, body {
   cursor: url('assets/images/my-cursor.png'), auto;
 }
+<script>
+    function scrollToSettings() {
+        document.getElementById('settingsMenu').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    const cloakPresets = {
+        default: {
+            title: "Ted's Hub",
+            favicon: "ted-bouncer.jpeg"
+        },
+        schoology: {
+            title: "Home | Schoology",
+            favicon: "https://schoology.com"
+        },
+        ixl: {
+            title: "IXL | Dashboard",
+            favicon: "https://ixl.com"
+        },
+        clever: {
+            title: "Clever | Portal",
+            favicon: "https://clever.com"
+        },
+        google: {
+            title: "New Tab",
+            favicon: "https://google.com"
+        }
+    };
+
+    function changeTabCloak() {
+        const selectValue = document.getElementById('cloakSelect').value;
+        const selectedPreset = cloakPresets[selectValue];
+
+        if (selectedPreset) {
+            document.title = selectedPreset.title;
+
+            let link = document.querySelector("link[rel~='icon']");
+            if (!link) {
+                link = document.createElement('link');
+                link.rel = 'icon';
+                document.head.appendChild(link); // Fixed typo here
+            }
+            link.href = selectedPreset.favicon;
+
+            localStorage.setItem('savedCloak', selectValue);
+        }
+    }
+
+    window.onload = function() {
+        const savedCloak = localStorage.getItem('savedCloak');
+        if (savedCloak) {
+            document.getElementById('cloakSelect').value = savedCloak;
+            changeTabCloak();
+        }
+    };
+</script>
